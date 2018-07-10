@@ -218,16 +218,13 @@ def check_env(fn,is_preifx=False,is_path=False,unknown=False,exit=True):
 				sys.stderr.write("\"%s\" validated. A folder named this found.\n" % fn)
 			else:
 				sys.stderr.write("\"%s\" validated. A file named this found.\n" % fn)
-			return None
 		elif num_files > 0:
 			sys.stderr.write("\"%s\" validated. Files with this prefix found (%d).\n" % (fn,num_files))
-			return None
 		else:
 			if exit:
 				raise Warning("\"%s\" is not a file/folder/prefix!" % fn)
 			else:
 				sys.stderr.write("\"%s\" is neither a file/folder/prefix!\n" % fn)
-				return None
 	
 	if is_preifx == True:
 		prefix = fn.split("/")[-1]
@@ -241,27 +238,22 @@ def check_env(fn,is_preifx=False,is_path=False,unknown=False,exit=True):
 				raise Warning("\"%s\": no file with this prefix found!" % fn)
 			else:
 				sys.stderr.write("\"%s\": no file with this prefix found!" % fn)
-				return None
 		else:
 			sys.stderr.write("\"%s\": passed. %d files with this prefix.\n" % (fn,num_files))
-			return None
 	elif is_path == True:
 		if os.path.isdir(fn) == True:
 			sys.stderr.write("\"%s\" validated.\n" % fn)
-			return None
 		else:
 			if exit:
 				raise Warning("\"%s\" not exist!" % fn)
 			else:
 				sys.stderr.write("\"%s\" not exist!\n" % fn)
-				return None
 	else:
 		if os.path.isfile(fn) == True:
 			sys.stderr.write("\"%s\" validated.\n" % fn)
-			return None
 		else:
 			if exit:
 				raise Warning("\"%s\" not exist!" % fn)
 			else:
 				sys.stderr.write("\"%s\" not exist!\n" % fn)
-				return None
+	return fn
