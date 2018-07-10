@@ -198,14 +198,15 @@ def check_env(fn,is_preifx=False,is_path=False,unknown=False,exit=True):
 	''' check if file/files exist '''
 	if unknown == True:
 		prefix = fn.split("/")[-1]
-		path = re.sub("/*$","/",fn)
+		path = "/".join(fn.split("/")[:-1])+"/"
+
 		num_files = 0
 		is_file = False
 		is_path = False
 		is_dir = False
 		try:
 			for files in os.listdir(path):
-				if re.search("^"+prefix,files):
+				if re.search("^%s" % prefix,files):
 					num_files += 1
 		except OSError:
 			pass
@@ -225,35 +226,35 @@ def check_env(fn,is_preifx=False,is_path=False,unknown=False,exit=True):
 				raise Warning("\"%s\" is not a file/folder/prefix!" % fn)
 			else:
 				sys.stderr.write("\"%s\" is neither a file/folder/prefix!\n" % fn)
-	
-	if is_preifx == True:
-		prefix = fn.split("/")[-1]
-		path = re.sub("/*$","/$",fn)
-		num_files = 0
-		for files in os.listdir(path):
-			if re.search("^"+prefix,files):
-				num_files += 1
-		if num_files == 0:
-			if exit:
-				raise Warning("\"%s\": no file with this prefix found!" % fn)
-			else:
-				sys.stderr.write("\"%s\": no file with this prefix found!" % fn)
-		else:
-			sys.stderr.write("\"%s\": passed. %d files with this prefix.\n" % (fn,num_files))
-	elif is_path == True:
-		if os.path.isdir(fn) == True:
-			sys.stderr.write("\"%s\" validated.\n" % fn)
-		else:
-			if exit:
-				raise Warning("\"%s\" not exist!" % fn)
-			else:
-				sys.stderr.write("\"%s\" not exist!\n" % fn)
 	else:
-		if os.path.isfile(fn) == True:
-			sys.stderr.write("\"%s\" validated.\n" % fn)
-		else:
-			if exit:
-				raise Warning("\"%s\" not exist!" % fn)
+		if is_preifx == True:
+			prefix = fn.split("/")[-1]
+			path = "/".join(fn.split("/")[:-1])+"/"
+			num_files = 0
+			for files in os.listdir(path):
+				if re.search("^%s" % prefix,files):
+					num_files += 1
+			if num_files == 0:
+				if exit:
+					raise Warning("\"%s\": no file with this prefix found!" % fn)
+				else:
+					sys.stderr.write("\"%s\": no file with this prefix found!" % fn)
 			else:
-				sys.stderr.write("\"%s\" not exist!\n" % fn)
+				sys.stderr.write("\"%s\": passed. %d files with this prefix.\n" % (fn,num_files))
+		elif is_path == True:
+			if os.path.isdir(fn) == True:
+				sys.stderr.write("\"%s\" validated.\n" % fn)
+			else:
+				if exit:
+					raise Warning("\"%s\" not exist!" % fn)
+				else:
+					sys.stderr.write("\"%s\" not exist!\n" % fn)
+		else:
+			if os.path.isfile(fn) == True:
+				sys.stderr.write("\"%s\" validated.\n" % fn)
+			else:
+				if exit:
+					raise Warning("\"%s\" not exist!" % fn)
+				else:
+					sys.stderr.write("\"%s\" not exist!\n" % fn)
 	return fn
