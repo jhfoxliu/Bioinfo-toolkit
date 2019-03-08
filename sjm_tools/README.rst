@@ -11,7 +11,9 @@ Installation
 Usage
 ==========================================================================================================
 To import the module:
-``import sjm_tools``
+::
+  import sjm_tools
+::
 
 Check if your paths are right:
 ::
