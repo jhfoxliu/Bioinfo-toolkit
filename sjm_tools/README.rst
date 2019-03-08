@@ -25,13 +25,23 @@ Check if your paths are right:
 Basic structure:
 ::
   Create job 
-  Prefix 1
-  Process 1
-  Suffix 1
-  Preifx 2
-  Process 2
-  Suffix 2
+  
+  Create step 1
+  Add prefix 1
+  Add process 1-1
+  Add process 1-2
   ...
+  Add suffix 1
+  
+  Add step 2
+  Add preifx 2
+  Add process 2-1
+  Add process 2-2
+  ...
+  Add suffix 2
+  
+  ...
+  
   Finsihed
   Submit (optional)
 ::
