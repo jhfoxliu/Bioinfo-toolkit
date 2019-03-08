@@ -14,12 +14,13 @@ To import the module:
 ``import sjm_tools``
 
 Check if your paths are right:
-``from sjm_tools import check_env 
-fasta_file = check_env(<PATH_TO_A_FILE>)
-bowtie2_dir = check_env(<PATH_TO_DIRECTORY>,is_path=True)
-bowtie2_index = check_env(<PATH_TO_FILE_PREFIX>,is_prefix=True)
-unknow_item = check_env(<PATH_TO_UNKOWN>,unknown=True)
-``
+::
+  from sjm_tools import check_env 
+  fasta_file = check_env(<PATH_TO_A_FILE>)
+  bowtie2_dir = check_env(<PATH_TO_DIRECTORY>,is_path=True)
+  bowtie2_index = check_env(<PATH_TO_FILE_PREFIX>,is_prefix=True)
+  unknow_item = check_env(<PATH_TO_UNKOWN>,unknown=True)
+::
 
 Basic structure:
 ::
